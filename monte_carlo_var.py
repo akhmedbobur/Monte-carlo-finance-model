@@ -308,7 +308,8 @@ def main():
 
     # Step 3
     rng = np.random.default_rng(args.seed)
-    z = rng.standard_normal((args.sims, args.horizon, n))
+    df = 5 
+    z = rng.standard_t(df, size=(args.sims, args.horizon, n)) / np.sqrt(df / (df - 2))
     paths = simulate_portfolio_paths(est["mu_d"], est["vol_d"], est["corr"], weights, z)
     port = paths[:, -1]
 
